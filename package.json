@@ -1,0 +1,35 @@
+{
+  "name": "find-a-frind-api",
+  "version": "1.0.0",
+  "description": "Esse projeto consiste no desenvolvimento de uma API REST chamada FindAFriend para um sistema de adoção de animais. O projeto deve ser construído reforçando os conceitos de SOLID e a prática de testes automatizados.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "start": "node build/server.js",
+    "build": "tsup src --out-dir build",
+    "test": "vitest run --project unit",
+    "test:e2e": "vitest run --project e2e",
+    "test:watch": "vitest --project unit",
+    "test:watch:e2e": "vitest --project e2e",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@rocketseat/eslint-config": "2.2.2",
+    "@types/node": "^25.5.0",
+    "eslint": "8.57.1",
+    "prisma": "6.19.2",
+    "tsup": "^8.5.1",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.2"
+  },
+  "dependencies": {
+    "@prisma/client": "6.19.2",
+    "dotenv": "17.3.1",
+    "fastify": "^5.8.4",
+    "zod": "4.3.6"
+  }
+}
