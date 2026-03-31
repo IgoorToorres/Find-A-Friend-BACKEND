@@ -5,7 +5,7 @@
 - [x] RF01 - Permitir o cadastro de uma organização (ORG)
 - [x] RF02 - Permitir o login de uma organização
 - [x] RF03 - Permitir o cadastro de um pet vinculado a uma ORG
-- [ ] RF04 - Permitir listar todos os pets disponíveis para adoção em uma cidade
+- [x] RF04 - Permitir listar todos os pets disponíveis para adoção em uma cidade
 - [ ] RF05 - Permitir filtrar pets por características:
   - [ ] idade
   - [ ] porte
