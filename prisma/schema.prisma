@@ -14,8 +14,8 @@ model Org {
   email     String   @unique
   cep       String
   address   String
-  latitude  Decimal? @db.Decimal(10, 8)
-  longitude Decimal? @db.Decimal(11, 8)
+  latitude  Decimal  @db.Decimal(10, 8)
+  longitude Decimal  @db.Decimal(11, 8)
   phone     String
   password  String
   createdAt DateTime @default(now()) @map("created_at")
