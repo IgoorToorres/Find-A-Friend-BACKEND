@@ -16,11 +16,16 @@ export class InMemoryPetsRepository implements PetsRepository {
       independenceLevel: data.independenceLevel,
       environment: data.environment,
       orgId: data.orgId,
+      city: data.city,
       createdAt: new Date(),
     } as Pet
 
     this.items.push(pet)
 
     return pet
+  }
+
+  async fetchPetsByCity(city: string) {
+    return this.items.filter((item) => item.city.includes(city))
   }
 }

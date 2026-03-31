@@ -34,6 +34,7 @@ model Pet {
   energyLevel       EnergyLevel       @map("energy_level")
   independenceLevel IndependenceLevel @map("independence_level")
   environment       Environment
+  city              String
   createdAt         DateTime          @default(now()) @map("created_at")
 
   orgId String @map("org_id")
@@ -41,6 +42,7 @@ model Pet {
 
   requirements Requirement[]
 
+  @@index([city])
   @@map("pets")
 }
 

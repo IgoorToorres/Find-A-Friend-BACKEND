@@ -26,7 +26,7 @@ describe('Create Pet By Org', () => {
     const org = await orgRepository.create({
       name: 'org test',
       email: 'org@test.com',
-      cep: '123123123132',
+      cep: '71720022',
       address: 'endereco da organizacao',
       latitude: -15.6887474,
       longitude: -47.7044456,

@@ -2,6 +2,7 @@ import { PetsRepository } from '@/repositories/pets-repository'
 import { Pet } from 'generated/prisma'
 import { InexistentOrgError } from '../errors/inexistent-org-error'
 import { OrgsRepository } from '@/repositories/orgs-repository'
+import { getCityFromCep } from '@/utils/get-city-from-cep'
 
 interface CreatePetParams {
   name: string
@@ -40,6 +41,8 @@ export class CreatePetService {
       throw new InexistentOrgError()
     }
 
+    const city = await getCityFromCep(org.cep)
+
     const pet = await this.petsRepository.create({
       name,
       about,
@@ -49,6 +52,7 @@ export class CreatePetService {
       independenceLevel,
       environment,
       orgId,
+      city,
     })
 
     return { pet }
