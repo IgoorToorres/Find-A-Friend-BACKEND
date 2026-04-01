@@ -1,5 +1,6 @@
 import { PetsRepository } from '@/repositories/pets-repository'
 import { Pet } from 'generated/prisma'
+import { AnyCityInformedError } from '../errors/any-city-informed-error'
 
 interface FetchPetsByFiltersQuery {
   city: string
@@ -25,7 +26,7 @@ export class FetchPetsByFiltersService {
     independenceLevel,
     environment,
   }: FetchPetsByFiltersQuery): Promise<FetchPetsByFiltersResponse> {
-    if (!city.trim()) throw new Error('Nenhuma cidade informada')
+    if (!city.trim()) throw new AnyCityInformedError()
 
     const pets = await this.petsRepository.fetchPetsByFilters({
       city,
