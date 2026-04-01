@@ -7,9 +7,11 @@ interface GetOrgByPetServiceParams {
   petId: string
 }
 
+type SafeOrg = Omit<Org, 'password'>
+
 interface GetOrgByPetServiceResponse {
   pet: Pet
-  org: Org
+  org: SafeOrg
 }
 
 export class GetOrgByPetService {
@@ -29,9 +31,12 @@ export class GetOrgByPetService {
 
     if (!org) throw new InexistentOrgError()
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...safeOrg } = org
+
     return {
       pet,
-      org,
+      org: safeOrg,
     }
   }
 }
