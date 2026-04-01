@@ -72,3 +72,33 @@
 - [x] UC06 - Listar requirements de um pet
 - [x] UC07 - Associar requirements a um pet
 - [ ] UC08 - Exibir informações da ORG responsável pelo pet para contato
+
+---
+
+## 🔗 Rotas da API (para cumprir os requisitos)
+
+- [ ] `POST /orgs`  
+  Criação de ORG (RF01, UC01)
+
+- [ ] `POST /authenticate`  
+  Autenticação da ORG e emissão de token (RF02, UC02)
+
+- [ ] `GET /profile` (JWT obrigatório)  
+  Perfil da ORG autenticada (apoio para gestão)
+
+- [ ] `POST /pets` (JWT obrigatório)  
+  Criação de pet vinculado à ORG (RF03, RN02, RN05, UC03)
+
+- [ ] `GET /pets`  
+  Lista pets por cidade com filtros opcionais (RF04, RF05, RF09, RN01, RN06, UC04)  
+  Query esperada: `city` (obrigatório), `age`, `size`, `energyLevel`, `independenceLevel`, `environment`
+
+- [ ] `GET /pets/:petId`  
+  Detalhes do pet (RF06, UC05)
+
+- [ ] `GET /pets/:petId/requirements`  
+  Lista requirements do pet (RF07, UC06)
+
+- [ ] `GET /pets/:petId/org`  
+  Dados da ORG responsável para contato (RF10, UC08)  
+  Importante: não retornar `password` nem dados sensíveis.
