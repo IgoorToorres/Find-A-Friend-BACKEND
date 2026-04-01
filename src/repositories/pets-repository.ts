@@ -20,4 +20,5 @@ export type FetchPetsFilters = {
 export interface PetsRepository {
   create(data: Prisma.PetUncheckedCreateInput): Promise<Pet>
   fetchPetsByFilters(filters: FetchPetsFilters): Promise<Pet[]>
+  getPetDetails(petId: string): Promise<Pet | null>
 }

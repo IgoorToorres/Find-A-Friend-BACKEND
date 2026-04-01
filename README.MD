@@ -12,7 +12,7 @@
   - [x] nível de energia
   - [x] nível de independência
   - [x] ambiente
-- [ ] RF06 - Permitir visualizar os detalhes de um pet
+- [x] RF06 - Permitir visualizar os detalhes de um pet
 - [ ] RF07 - Permitir listar os requisitos de um pet
 - [ ] RF08 - Permitir associar múltiplos requisitos a um pet
 - [ ] RF09 - Permitir buscar pets por cidade
