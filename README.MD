@@ -27,8 +27,8 @@
 - [x] RN03 - Uma ORG deve possuir:
   - [x] endereço
   - [x] número de WhatsApp
-- [ ] RN04 - O contato para adoção deve ser feito diretamente com a ORG via WhatsApp
-- [ ] RN05 - Apenas ORGs autenticadas podem cadastrar pets
+- [x] RN04 - O contato para adoção deve ser feito diretamente com a ORG via WhatsApp
+- [x] RN05 - Apenas ORGs autenticadas podem cadastrar pets
 - [x] RN06 - Os filtros de pets são opcionais, exceto cidade
 - [x] RN07 - Um pet pode possuir múltiplos requisitos
 - [x] RN08 - Requisitos podem ser reutilizados entre diferentes pets
@@ -40,25 +40,25 @@
   - [x] nível de energia
   - [x] nível de independência
   - [x] ambiente
-- [ ] RN11 - O sistema não realiza intermediação da adoção (apenas conecta usuário à ORG)
+- [x] RN11 - O sistema não realiza intermediação da adoção (apenas conecta usuário à ORG)
 
 ---
 
 ## 🚀 Requisitos Não Funcionais (RNF)
 
 - [x] RNF01 - A API deve ser desenvolvida em Node.js
-- [ ] RNF02 - Utilizar PostgreSQL como banco de dados
+- [x] RNF02 - Utilizar PostgreSQL como banco de dados
 - [x] RNF03 - Utilizar Prisma como ORM
-- [ ] RNF04 - A API deve seguir padrão REST
+- [x] RNF04 - A API deve seguir padrão REST
 - [x] RNF05 - Os dados devem ser persistidos de forma relacional
 - [x] RNF06 - O sistema deve garantir integridade relacional (FK entre Pet e Org)
-- [ ] RNF07 - A autenticação deve ser segura (ex: JWT)
+- [x] RNF07 - A autenticação deve ser segura (ex: JWT)
 - [x] RNF08 - As senhas devem ser armazenadas com hash (ex: bcrypt)
-- [ ] RNF09 - O sistema deve permitir escalabilidade para múltiplas ORGs
-- [ ] RNF10 - O tempo de resposta das requisições deve ser rápido (< 500ms ideal)
-- [ ] RNF11 - O sistema deve ser preparado para deploy (ex: Docker)
-- [ ] RNF12 - O código deve seguir boas práticas de organização e separação de responsabilidades
-- [ ] RNF13 - A API deve permitir fácil integração com front-end ou mobile
+- [x] RNF09 - O sistema deve permitir escalabilidade para múltiplas ORGs
+- [x] RNF10 - O tempo de resposta das requisições deve ser rápido (< 500ms ideal)
+- [x] RNF11 - O sistema deve ser preparado para deploy (ex: Docker)
+- [x] RNF12 - O código deve seguir boas práticas de organização e separação de responsabilidades
+- [x] RNF13 - A API deve permitir fácil integração com front-end ou mobile
 
 ---
 
@@ -71,34 +71,28 @@
 - [x] UC05 - Visualizar detalhes de um pet
 - [x] UC06 - Listar requirements de um pet
 - [x] UC07 - Associar requirements a um pet
-- [ ] UC08 - Exibir informações da ORG responsável pelo pet para contato
+- [x] UC08 - Exibir informações da ORG responsável pelo pet para contato
 
 ---
 
 ## 🔗 Rotas da API (para cumprir os requisitos)
 
-- [ ] `POST /orgs`  
+- [x] `POST /orgs`  
   Criação de ORG (RF01, UC01)
 
-- [ ] `POST /authenticate`  
+- [x] `POST /authenticate`  
   Autenticação da ORG e emissão de token (RF02, UC02)
 
-- [ ] `GET /profile` (JWT obrigatório)  
+- [x] `GET /profile` (JWT obrigatório)  
   Perfil da ORG autenticada (apoio para gestão)
 
-- [ ] `POST /pets` (JWT obrigatório)  
+- [x] `POST /pet` (JWT obrigatório)  
   Criação de pet vinculado à ORG (RF03, RN02, RN05, UC03)
 
-- [ ] `GET /pets`  
+- [x] `GET /pets`  
   Lista pets por cidade com filtros opcionais (RF04, RF05, RF09, RN01, RN06, UC04)  
   Query esperada: `city` (obrigatório), `age`, `size`, `energyLevel`, `independenceLevel`, `environment`
 
-- [ ] `GET /pets/:petId`  
+- [x] `GET /pet/:petId`  
   Detalhes do pet (RF06, UC05)
 
-- [ ] `GET /pets/:petId/requirements`  
-  Lista requirements do pet (RF07, UC06)
-
-- [ ] `GET /pets/:petId/org`  
-  Dados da ORG responsável para contato (RF10, UC08)  
-  Importante: não retornar `password` nem dados sensíveis.
