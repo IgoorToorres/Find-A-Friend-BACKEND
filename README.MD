@@ -1,5 +1,282 @@
 # 📌 Documentação de Requisitos — Find a Friend API
 
+## ✅ Visão Geral
+
+API REST para adoção de animais. O fluxo principal é:
+1. ORGs se cadastram e autenticam.
+2. ORGs criam pets para adoção.
+3. Usuários consultam pets por cidade e filtros.
+4. Usuários acessam detalhes do pet e contato da ORG.
+
+---
+
+## 🧰 Tecnologias Utilizadas
+
+- Node.js + TypeScript
+- Fastify
+- Prisma ORM
+- PostgreSQL
+- Zod (validação)
+- JWT + Cookies (auth e refresh)
+- Vitest (unit e e2e)
+- Docker Compose (banco local)
+- TSUP e TSX (build e dev)
+
+---
+
+## 🧱 Arquitetura
+
+O projeto segue uma separação clara por camadas:
+
+- `HTTP (Controllers)` recebe e valida a requisição, chama serviços e retorna resposta
+- `Services (Use Cases)` concentra regras de negócio e orquestra repositorios
+- `Repositories` definem contratos e implementações (Prisma e In-Memory)
+- `Lib/Infra` concentra integrações com Prisma e utilidades
+- `Env` valida variáveis de ambiente com Zod
+- `Tests` organizados em unitários e e2e
+
+---
+
+## 🗂️ Estrutura de Pastas
+
+| Caminho | Descrição |
+| --- | --- |
+| `src/app.ts` | Registro de plugins, rotas e tratamento de erros |
+| `src/server.ts` | Bootstrap do servidor |
+| `src/env/index.ts` | Validação de variáveis de ambiente |
+| `src/http/controllers` | Controllers e rotas HTTP |
+| `src/http/middlewares` | Middlewares de autenticação |
+| `src/services` | Casos de uso (regras de negócio) |
+| `src/services/factories` | Injeção de dependências dos serviços |
+| `src/repositories` | Contratos e implementações (Prisma/In-Memory) |
+| `src/lib/prisma.ts` | Cliente Prisma |
+| `src/utils/get-city-from-cep.ts` | Integração com ViaCEP (CEP -> cidade) |
+| `prisma/schema.prisma` | Modelos e enums do banco |
+| `prisma/migrations` | Migrações do banco |
+| `generated/prisma` | Prisma Client gerado |
+
+---
+
+## 🔐 Variáveis de Ambiente
+
+Crie um `.env` baseado em `.env.example`:
+
+```bash
+cp .env.example .env
+```
+
+Campos obrigatórios:
+
+```
+NODE_ENV=dev
+DATABASE_URL=postgresql://docker:docker@localhost:5432/findafriend?schema=public
+JWT_SECRET=uma-chave-forte-aqui
+```
+
+---
+
+## ▶️ Como Rodar o Projeto (Passo a Passo)
+
+1. Suba o PostgreSQL com Docker:
+```bash
+docker-compose up -d
+```
+
+2. Instale dependências:
+```bash
+npm install
+```
+
+3. Configure as variáveis de ambiente:
+```bash
+cp .env.example .env
+```
+
+4. Rode as migrações:
+```bash
+npx prisma migrate dev
+```
+
+5. Gere o Prisma Client (caso necessário):
+```bash
+npx prisma generate
+```
+
+6. Inicie o servidor em modo desenvolvimento:
+```bash
+npm run dev
+```
+
+Servidor padrão: `http://localhost:3333`
+
+---
+
+## 🧪 Testes
+
+Unitários:
+```bash
+npm run test
+```
+
+E2E:
+```bash
+npm run test:e2e
+```
+
+Watch:
+```bash
+npm run test:watch
+```
+
+Cobertura:
+```bash
+npm run test:coverage
+```
+
+Observação: os testes e2e usam `DATABASE_URL` e criam um schema isolado via Prisma.
+
+---
+
+## ⚙️ Scripts Disponíveis
+
+- `npm run dev` inicia o servidor com reload
+- `npm run build` gera build em `build/`
+- `npm run start` executa o build
+- `npm run test` executa testes unitários
+- `npm run test:e2e` executa testes de integração
+- `npm run test:coverage` executa cobertura de testes
+
+---
+
+## 🧩 Modelagem (Prisma)
+
+Entidades principais:
+
+- `Org` possui `pets`
+- `Pet` pertence a uma `org` e possui `requirements`
+- `Requirement` pode ser reutilizado entre vários pets
+
+Enums usados:
+
+| Enum | Valores |
+| --- | --- |
+| `PetAge` | `PUPPY`, `ADULT`, `SENIOR` |
+| `PetSize` | `SMALL`, `MEDIUM`, `LARGE` |
+| `EnergyLevel` | `LOW`, `MEDIUM`, `HIGH` |
+| `IndependenceLevel` | `LOW`, `MEDIUM`, `HIGH` |
+| `Environment` | `SMALL_SPACE`, `MEDIUM_SPACE`, `LARGE_SPACE` |
+
+---
+
+## 🔗 Rotas da API (Detalhadas)
+
+### `POST /orgs`
+Cadastro de ORG.
+
+Body:
+```json
+{
+  "name": "ONG Exemplo",
+  "email": "contato@ong.com",
+  "cep": "01001000",
+  "address": "Rua Exemplo, 123",
+  "latitude": -23.5505,
+  "longitude": -46.6333,
+  "phone": "11999999999",
+  "password": "123456"
+}
+```
+
+Responses:
+- `201 Created`
+- `409 Conflict` ORG já existe
+
+---
+
+### `POST /authenticate`
+Login de ORG.
+
+Body:
+```json
+{
+  "email": "contato@ong.com",
+  "password": "123456"
+}
+```
+
+Response:
+- `200 OK` retorna `token` e define `refreshToken` em cookie
+- `400 Bad Request` credenciais inválidas
+
+---
+
+### `GET /profile`
+Perfil da ORG autenticada.
+
+Requer:
+`Authorization: Bearer <token>`
+
+Response:
+- `200 OK` retorna dados da ORG (senha omitida)
+
+---
+
+### `POST /pet`
+Cadastro de pet (requer auth).
+
+Requer:
+`Authorization: Bearer <token>`
+
+Body:
+```json
+{
+  "name": "Nina",
+  "about": "Carinhosa e ativa",
+  "age": "PUPPY",
+  "size": "SMALL",
+  "energyLevel": "HIGH",
+  "independenceLevel": "LOW",
+  "environment": "SMALL_SPACE",
+  "orgId": "uuid-da-org",
+  "requirements": ["Casa telada", "Passeios diários"]
+}
+```
+
+Responses:
+- `201 Created`
+- `400 Bad Request` ORG inexistente
+
+Observação: a cidade do pet é derivada automaticamente pelo CEP da ORG usando ViaCEP.
+
+---
+
+### `GET /pets`
+Lista pets por cidade com filtros opcionais.
+
+Query obrigatória:
+`city`
+
+Filtros opcionais:
+`age`, `size`, `energyLevel`, `independenceLevel`, `environment`
+
+Exemplo:
+`/pets?city=São%20Paulo&age=ADULT&size=MEDIUM`
+
+Response:
+- `200 OK` com `{ "pets": [] }`
+- `400 Bad Request` se `city` estiver vazia
+
+---
+
+### `GET /pet/:petId`
+Detalhes do pet com ORG e requisitos.
+
+Response:
+- `200 OK` com `{ "pet": {}, "org": {}, "requeriments": [] }`
+- `400 Bad Request` se pet/ORG não existir
+
+---
+
 ## ✅ Requisitos Funcionais (RF)
 
 - [x] RF01 - Permitir o cadastro de uma organização (ORG)
@@ -95,4 +372,3 @@
 
 - [x] `GET /pet/:petId`  
   Detalhes do pet (RF06, UC05)
-
