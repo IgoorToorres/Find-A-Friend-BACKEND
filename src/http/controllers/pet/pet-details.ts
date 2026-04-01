@@ -14,7 +14,6 @@ export async function petDetails(request: FastifyRequest, reply: FastifyReply) {
     const getOrgByPet = makeGetOrgByPets()
 
     const { org, pet, requeriments } = await getOrgByPet.execute({ petId })
-    console.log({ org, pet, requeriments })
     return reply.status(200).send({ org, pet, requeriments })
   } catch (err) {
     if (err instanceof InexistentOrgError) {
