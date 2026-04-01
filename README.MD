@@ -16,7 +16,7 @@
 - [x] RF07 - Permitir listar os requisitos de um pet
 - [x] RF08 - Permitir associar múltiplos requisitos a um pet
 - [x] RF09 - Permitir buscar pets por cidade
-- [ ] RF10 - Exibir informações da ORG responsável pelo pet para contato
+- [x] RF10 - Exibir informações da ORG responsável pelo pet para contato
 
 ---
 
