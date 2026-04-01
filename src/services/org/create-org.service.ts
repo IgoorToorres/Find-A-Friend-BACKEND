@@ -1,6 +1,7 @@
 import { OrgsRepository } from '@/repositories/orgs-repository'
 import { hash } from 'bcryptjs'
 import { Org } from 'generated/prisma'
+import { OrgAlredyExists } from '../errors/org-alredy-exists-error'
 
 interface CreateOrgParams {
   name: string
@@ -31,6 +32,10 @@ export class CreateOrgService {
     password,
   }: CreateOrgParams): Promise<CreateOrgResponse> {
     const password_hash = await hash(password, 6)
+
+    const userWithSameEmail = await this.orgRepository.findByEmail(email)
+
+    if (userWithSameEmail) throw new OrgAlredyExists()
 
     const org = await this.orgRepository.create({
       name,
