@@ -13,6 +13,7 @@ interface CreatePetParams {
   independenceLevel: 'LOW' | 'MEDIUM' | 'HIGH'
   environment: 'SMALL_SPACE' | 'MEDIUM_SPACE' | 'LARGE_SPACE'
   orgId: string
+  requirements: string[]
 }
 
 interface CreatePetResponse {
@@ -34,6 +35,7 @@ export class CreatePetService {
     independenceLevel,
     environment,
     orgId,
+    requirements,
   }: CreatePetParams): Promise<CreatePetResponse> {
     const org = await this.orgRepository.findById(orgId)
 
@@ -53,6 +55,7 @@ export class CreatePetService {
       environment,
       orgId,
       city,
+      requirements,
     })
 
     return { pet }

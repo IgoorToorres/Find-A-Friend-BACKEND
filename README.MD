@@ -13,33 +13,33 @@
   - [x] nível de independência
   - [x] ambiente
 - [x] RF06 - Permitir visualizar os detalhes de um pet
-- [ ] RF07 - Permitir listar os requisitos de um pet
-- [ ] RF08 - Permitir associar múltiplos requisitos a um pet
-- [ ] RF09 - Permitir buscar pets por cidade
+- [x] RF07 - Permitir listar os requisitos de um pet
+- [x] RF08 - Permitir associar múltiplos requisitos a um pet
+- [x] RF09 - Permitir buscar pets por cidade
 - [ ] RF10 - Exibir informações da ORG responsável pelo pet para contato
 
 ---
 
 ## ⚙️ Regras de Negócio (RN)
 
-- [ ] RN01 - A cidade é obrigatória para listagem de pets
-- [ ] RN02 - Todos os pets devem estar vinculados a uma ORG
-- [ ] RN03 - Uma ORG deve possuir:
-  - [ ] endereço
-  - [ ] número de WhatsApp
+- [x] RN01 - A cidade é obrigatória para listagem de pets
+- [x] RN02 - Todos os pets devem estar vinculados a uma ORG
+- [x] RN03 - Uma ORG deve possuir:
+  - [x] endereço
+  - [x] número de WhatsApp
 - [ ] RN04 - O contato para adoção deve ser feito diretamente com a ORG via WhatsApp
 - [ ] RN05 - Apenas ORGs autenticadas podem cadastrar pets
-- [ ] RN06 - Os filtros de pets são opcionais, exceto cidade
-- [ ] RN07 - Um pet pode possuir múltiplos requisitos
-- [ ] RN08 - Requisitos podem ser reutilizados entre diferentes pets
-- [ ] RN09 - Uma ORG pode cadastrar múltiplos pets
-- [ ] RN10 - Um pet deve possuir informações obrigatórias:
-  - [ ] nome
-  - [ ] idade
-  - [ ] porte
-  - [ ] nível de energia
-  - [ ] nível de independência
-  - [ ] ambiente
+- [x] RN06 - Os filtros de pets são opcionais, exceto cidade
+- [x] RN07 - Um pet pode possuir múltiplos requisitos
+- [x] RN08 - Requisitos podem ser reutilizados entre diferentes pets
+- [x] RN09 - Uma ORG pode cadastrar múltiplos pets
+- [x] RN10 - Um pet deve possuir informações obrigatórias:
+  - [x] nome
+  - [x] idade
+  - [x] porte
+  - [x] nível de energia
+  - [x] nível de independência
+  - [x] ambiente
 - [ ] RN11 - O sistema não realiza intermediação da adoção (apenas conecta usuário à ORG)
 
 ---

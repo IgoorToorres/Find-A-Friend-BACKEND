@@ -29,6 +29,7 @@ describe('Get Pet Details', () => {
       environment: Environment.SMALL_SPACE,
       orgId: 'org-01',
       city: 'SAO PAULO',
+      requirements: [],
     })
 
     const { pet } = await sut.execute({ petId: created.id })

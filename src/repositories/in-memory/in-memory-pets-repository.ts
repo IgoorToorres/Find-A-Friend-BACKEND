@@ -1,12 +1,20 @@
-import { Pet, Prisma } from 'generated/prisma'
+import { Pet, Requirement } from 'generated/prisma'
 import { randomUUID } from 'node:crypto'
-import { FetchPetsFilters, PetsRepository } from '../pets-repository'
+import {
+  CreatePetDTO,
+  FetchPetsFilters,
+  PetsRepository,
+} from '../pets-repository'
+
+type PetWithRequirements = Pet & {
+  requirements: Requirement[]
+}
 
 export class InMemoryPetsRepository implements PetsRepository {
-  public items: Pet[] = []
+  public items: PetWithRequirements[] = []
 
-  async create(data: Prisma.PetUncheckedCreateInput) {
-    const pet = {
+  async create(data: CreatePetDTO) {
+    const pet: PetWithRequirements = {
       id: randomUUID(),
       name: data.name,
       about: data.about,
@@ -18,10 +26,13 @@ export class InMemoryPetsRepository implements PetsRepository {
       orgId: data.orgId,
       city: data.city,
       createdAt: new Date(),
-    } as Pet
+      requirements: data.requirements.map((name) => ({
+        id: randomUUID(),
+        name,
+      })),
+    }
 
     this.items.push(pet)
-
     return pet
   }
 
@@ -54,5 +65,11 @@ export class InMemoryPetsRepository implements PetsRepository {
     }
 
     return pet
+  }
+
+  async getPetRequirements(petId: string) {
+    const pet = this.items.find((item) => item.id === petId)
+    if (!pet) return []
+    return pet.requirements
   }
 }

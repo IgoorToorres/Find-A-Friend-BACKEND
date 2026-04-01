@@ -29,6 +29,7 @@ describe('Fetch Pets By City And Filters', () => {
       environment: Environment.SMALL_SPACE,
       orgId: 'org-01',
       city: 'SAO PAULO',
+      requirements: [],
     })
 
     await petsRepository.create({
@@ -41,6 +42,7 @@ describe('Fetch Pets By City And Filters', () => {
       environment: Environment.MEDIUM_SPACE,
       orgId: 'org-01',
       city: 'SAO PAULO',
+      requirements: [],
     })
 
     await petsRepository.create({
@@ -53,6 +55,7 @@ describe('Fetch Pets By City And Filters', () => {
       environment: Environment.LARGE_SPACE,
       orgId: 'org-02',
       city: 'RIO DE JANEIRO',
+      requirements: [],
     })
 
     const { pets } = await sut.execute({ city: 'SAO PAULO' })
@@ -80,6 +83,7 @@ describe('Fetch Pets By City And Filters', () => {
       environment: Environment.SMALL_SPACE,
       orgId: 'org-01',
       city: 'SAO PAULO',
+      requirements: [],
     })
 
     await petsRepository.create({
@@ -92,6 +96,7 @@ describe('Fetch Pets By City And Filters', () => {
       environment: Environment.MEDIUM_SPACE,
       orgId: 'org-01',
       city: 'SAO PAULO',
+      requirements: [],
     })
 
     const { pets } = await sut.execute({ city: 'SAO PAULO', age: PetAge.PUPPY })
@@ -111,6 +116,7 @@ describe('Fetch Pets By City And Filters', () => {
       environment: Environment.SMALL_SPACE,
       orgId: 'org-01',
       city: 'SAO PAULO',
+      requirements: [],
     })
 
     await petsRepository.create({
@@ -123,6 +129,7 @@ describe('Fetch Pets By City And Filters', () => {
       environment: Environment.MEDIUM_SPACE,
       orgId: 'org-01',
       city: 'SAO PAULO',
+      requirements: [],
     })
 
     const { pets } = await sut.execute({
@@ -145,6 +152,7 @@ describe('Fetch Pets By City And Filters', () => {
       environment: Environment.SMALL_SPACE,
       orgId: 'org-01',
       city: 'SAO PAULO',
+      requirements: [],
     })
 
     await petsRepository.create({
@@ -157,6 +165,7 @@ describe('Fetch Pets By City And Filters', () => {
       environment: Environment.MEDIUM_SPACE,
       orgId: 'org-01',
       city: 'SAO PAULO',
+      requirements: [],
     })
 
     const { pets } = await sut.execute({
@@ -179,6 +188,7 @@ describe('Fetch Pets By City And Filters', () => {
       environment: Environment.SMALL_SPACE,
       orgId: 'org-01',
       city: 'SAO PAULO',
+      requirements: [],
     })
 
     await petsRepository.create({
@@ -191,6 +201,7 @@ describe('Fetch Pets By City And Filters', () => {
       environment: Environment.MEDIUM_SPACE,
       orgId: 'org-01',
       city: 'SAO PAULO',
+      requirements: [],
     })
 
     const { pets } = await sut.execute({
@@ -213,6 +224,7 @@ describe('Fetch Pets By City And Filters', () => {
       environment: Environment.SMALL_SPACE,
       orgId: 'org-01',
       city: 'SAO PAULO',
+      requirements: [],
     })
 
     await petsRepository.create({
@@ -225,6 +237,7 @@ describe('Fetch Pets By City And Filters', () => {
       environment: Environment.MEDIUM_SPACE,
       orgId: 'org-01',
       city: 'SAO PAULO',
+      requirements: [],
     })
 
     const { pets } = await sut.execute({
@@ -247,6 +260,7 @@ describe('Fetch Pets By City And Filters', () => {
       environment: Environment.SMALL_SPACE,
       orgId: 'org-01',
       city: 'SAO PAULO',
+      requirements: [],
     })
 
     await petsRepository.create({
@@ -259,6 +273,7 @@ describe('Fetch Pets By City And Filters', () => {
       environment: Environment.MEDIUM_SPACE,
       orgId: 'org-01',
       city: 'SAO PAULO',
+      requirements: [],
     })
 
     const { pets } = await sut.execute({
