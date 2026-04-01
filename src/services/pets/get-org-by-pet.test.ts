@@ -8,7 +8,7 @@ import {
 } from 'generated/prisma'
 import { InMemoryOrgsRepository } from '@/repositories/in-memory/in-memory-orgs-repository'
 import { InMemoryPetsRepository } from '@/repositories/in-memory/in-memory-pets-repository'
-import { GetOrgByPet } from './get-org-by-pet.service'
+import { GetOrgByPetService } from './get-org-by-pet.service'
 import { InexistentOrgError } from '../errors/inexistent-org-error'
 
 vi.mock('@/utils/get-city-from-cep', () => {
@@ -19,13 +19,13 @@ vi.mock('@/utils/get-city-from-cep', () => {
 
 let orgRepository: InMemoryOrgsRepository
 let petsRepository: InMemoryPetsRepository
-let sut: GetOrgByPet
+let sut: GetOrgByPetService
 
 describe('Get Org By Pet', () => {
   beforeEach(() => {
     orgRepository = new InMemoryOrgsRepository()
     petsRepository = new InMemoryPetsRepository()
-    sut = new GetOrgByPet(petsRepository, orgRepository)
+    sut = new GetOrgByPetService(petsRepository, orgRepository)
   })
 
   it('Deveria retornar a org responsavel pelo pet', async () => {

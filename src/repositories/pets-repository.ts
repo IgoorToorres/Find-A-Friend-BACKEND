@@ -30,9 +30,13 @@ export interface CreatePetDTO {
   requirements: string[]
 }
 
+export type PetWithRequirements = Pet & {
+  requirements: Requirement[]
+}
+
 export interface PetsRepository {
-  create(data: CreatePetDTO): Promise<Pet>
+  create(data: CreatePetDTO): Promise<PetWithRequirements>
   fetchPetsByFilters(filters: FetchPetsFilters): Promise<Pet[]>
   getPetDetails(petId: string): Promise<Pet | null>
-  getPetRequirements(petId: string): Promise<Requirement[]>
+  fetchPetRequirements(petId: string): Promise<Requirement[]>
 }

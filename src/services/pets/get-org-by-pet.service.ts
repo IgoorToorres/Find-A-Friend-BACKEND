@@ -3,22 +3,24 @@ import { PetsRepository } from '@/repositories/pets-repository'
 import { Org, Pet } from 'generated/prisma'
 import { InexistentOrgError } from '../errors/inexistent-org-error'
 
-interface GetOrgByPetParams {
+interface GetOrgByPetServiceParams {
   petId: string
 }
 
-interface GetOrgByPetResponse {
+interface GetOrgByPetServiceResponse {
   pet: Pet
   org: Org
 }
 
-export class GetOrgByPet {
+export class GetOrgByPetService {
   constructor(
     private petRepository: PetsRepository,
     private orgRepository: OrgsRepository,
   ) {}
 
-  async execute({ petId }: GetOrgByPetParams): Promise<GetOrgByPetResponse> {
+  async execute({
+    petId,
+  }: GetOrgByPetServiceParams): Promise<GetOrgByPetServiceResponse> {
     const pet = await this.petRepository.getPetDetails(petId)
 
     if (!pet) throw new InexistentOrgError()

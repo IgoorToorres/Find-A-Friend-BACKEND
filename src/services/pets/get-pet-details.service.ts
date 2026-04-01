@@ -2,19 +2,19 @@ import { PetsRepository } from '@/repositories/pets-repository'
 import { Pet } from 'generated/prisma'
 import { InexistentPetError } from '../errors/inexistent-pet-error'
 
-interface GetPetDetailsRequest {
+interface GetPetDetailsServiceRequest {
   petId: string
 }
 
-interface GetPetDetailsResponse {
+interface GetPetDetailsServiceResponse {
   pet: Pet
 }
 
-export class GetPetDetails {
+export class GetPetDetailsService {
   constructor(private petRepository: PetsRepository) {}
   async execute({
     petId,
-  }: GetPetDetailsRequest): Promise<GetPetDetailsResponse> {
+  }: GetPetDetailsServiceRequest): Promise<GetPetDetailsServiceResponse> {
     const pet = await this.petRepository.getPetDetails(petId)
 
     if (!pet) {

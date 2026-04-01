@@ -7,15 +7,15 @@ import {
   PetSize,
 } from 'generated/prisma'
 import { InMemoryPetsRepository } from '@/repositories/in-memory/in-memory-pets-repository'
-import { GetPetRequirements } from './fetch-pet-requirements.service'
+import { FetchPetRequirementsService } from './fetch-pet-requirements.service'
 
 let petsRepository: InMemoryPetsRepository
-let sut: GetPetRequirements
+let sut: FetchPetRequirementsService
 
 describe('Fetch Pet Requirements', () => {
   beforeEach(() => {
     petsRepository = new InMemoryPetsRepository()
-    sut = new GetPetRequirements(petsRepository)
+    sut = new FetchPetRequirementsService(petsRepository)
   })
 
   it('Deveria retornar os requirements do pet', async () => {

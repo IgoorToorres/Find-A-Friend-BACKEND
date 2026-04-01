@@ -1,7 +1,7 @@
 import { PetsRepository } from '@/repositories/pets-repository'
 import { Pet } from 'generated/prisma'
 
-interface GetPetsByCityQuery {
+interface FetchPetsByFiltersQuery {
   city: string
   age?: 'PUPPY' | 'ADULT' | 'SENIOR'
   size?: 'SMALL' | 'MEDIUM' | 'LARGE'
@@ -10,11 +10,11 @@ interface GetPetsByCityQuery {
   environment?: 'SMALL_SPACE' | 'MEDIUM_SPACE' | 'LARGE_SPACE'
 }
 
-interface GetPetsByCityResponse {
+interface FetchPetsByFiltersResponse {
   pets: Pet[]
 }
 
-export class GetPetsByCityService {
+export class FetchPetsByFiltersService {
   constructor(private petsRepository: PetsRepository) {}
 
   async execute({
@@ -24,7 +24,7 @@ export class GetPetsByCityService {
     energyLevel,
     independenceLevel,
     environment,
-  }: GetPetsByCityQuery): Promise<GetPetsByCityResponse> {
+  }: FetchPetsByFiltersQuery): Promise<FetchPetsByFiltersResponse> {
     if (!city.trim()) throw new Error('Nenhuma cidade informada')
 
     const pets = await this.petsRepository.fetchPetsByFilters({

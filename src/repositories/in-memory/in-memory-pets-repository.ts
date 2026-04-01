@@ -1,14 +1,10 @@
-import { Pet, Requirement } from 'generated/prisma'
 import { randomUUID } from 'node:crypto'
 import {
   CreatePetDTO,
   FetchPetsFilters,
+  PetWithRequirements,
   PetsRepository,
 } from '../pets-repository'
-
-type PetWithRequirements = Pet & {
-  requirements: Requirement[]
-}
 
 export class InMemoryPetsRepository implements PetsRepository {
   public items: PetWithRequirements[] = []
@@ -67,7 +63,7 @@ export class InMemoryPetsRepository implements PetsRepository {
     return pet
   }
 
-  async getPetRequirements(petId: string) {
+  async fetchPetRequirements(petId: string) {
     const pet = this.items.find((item) => item.id === petId)
     if (!pet) return []
     return pet.requirements

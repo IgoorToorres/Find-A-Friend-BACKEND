@@ -7,15 +7,15 @@ import {
   PetSize,
 } from 'generated/prisma'
 import { InMemoryPetsRepository } from '@/repositories/in-memory/in-memory-pets-repository'
-import { GetPetsByCityService } from './fetch-pets-by-filters.service'
+import { FetchPetsByFiltersService } from './fetch-pets-by-filters.service'
 
 let petsRepository: InMemoryPetsRepository
-let sut: GetPetsByCityService
+let sut: FetchPetsByFiltersService
 
 describe('Fetch Pets By City And Filters', () => {
   beforeEach(() => {
     petsRepository = new InMemoryPetsRepository()
-    sut = new GetPetsByCityService(petsRepository)
+    sut = new FetchPetsByFiltersService(petsRepository)
   })
 
   it('Deveria listar pets por cidade', async () => {

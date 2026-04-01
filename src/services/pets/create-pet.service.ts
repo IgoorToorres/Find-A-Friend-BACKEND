@@ -1,10 +1,12 @@
-import { PetsRepository } from '@/repositories/pets-repository'
-import { Pet } from 'generated/prisma'
+import {
+  PetsRepository,
+  PetWithRequirements,
+} from '@/repositories/pets-repository'
 import { InexistentOrgError } from '../errors/inexistent-org-error'
 import { OrgsRepository } from '@/repositories/orgs-repository'
 import { getCityFromCep } from '@/utils/get-city-from-cep'
 
-interface CreatePetParams {
+interface CreatePetServiceParams {
   name: string
   about: string
   age: 'PUPPY' | 'ADULT' | 'SENIOR'
@@ -16,8 +18,8 @@ interface CreatePetParams {
   requirements: string[]
 }
 
-interface CreatePetResponse {
-  pet: Pet
+interface CreatePetServiceResponse {
+  pet: PetWithRequirements
 }
 
 export class CreatePetService {
@@ -36,7 +38,7 @@ export class CreatePetService {
     environment,
     orgId,
     requirements,
-  }: CreatePetParams): Promise<CreatePetResponse> {
+  }: CreatePetServiceParams): Promise<CreatePetServiceResponse> {
     const org = await this.orgRepository.findById(orgId)
 
     if (!org) {

@@ -8,7 +8,7 @@ import {
 } from 'generated/prisma'
 import { InMemoryOrgsRepository } from '@/repositories/in-memory/in-memory-orgs-repository'
 import { InMemoryPetsRepository } from '@/repositories/in-memory/in-memory-pets-repository'
-import { CreatePetService } from './create-pet-by-org.service'
+import { CreatePetService } from './create-pet.service'
 import { InexistentOrgError } from '../errors/inexistent-org-error'
 
 vi.mock('@/utils/get-city-from-cep', () => {
